@@ -1,17 +1,3 @@
-(*
-  # Compiling
-
-  ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_debug.ml
-
-  # Executing
-
-  Start ocaml interpreter and execute these:
-*)
-(* #use "topfind";; *)
-(* #camlp4o;; *)
-(* #load "pa_debug.cmo";; *)
-(* debug.(let fact n = n*2);; *)
-
 open Camlp4.PreCast
 open Syntax
 open Debug
