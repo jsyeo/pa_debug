@@ -1,0 +1,2 @@
+<pa_debug.*>: pp(camlp4orf.opt), package(deriving-ocsigen.syntax), syntax(camlp4o), use_camlp4
+<out.*>: package(deriving-ocsigen.syntax), syntax(camlp4o)

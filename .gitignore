@@ -1,0 +1,10 @@
+# ocaml files
+_build
+*.cmo
+*.cmi
+*.cma
+*.cmax
+
+# vim files
+*~
+*.swp
