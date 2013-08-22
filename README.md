@@ -1,10 +1,8 @@
 # pa_debug
-- - -
 
 A syntax extension to make ocaml debugging easier.
 
 ## Compiling
-- - -
 
 Just make!
 
@@ -12,7 +10,6 @@ Just make!
 
 
 ## Usage
-- - -
 
 While in the project's root directory, fire up the ocaml interpreter with these flags :
 
