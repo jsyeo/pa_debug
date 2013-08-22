@@ -17,7 +17,7 @@ debug:
 	ocamlc -c debug.cmo
 
 pa_debug_ob:
-	ocamlbuild -no-links -libs $(LIBS) -use-ocamlfind pa_debug.cmo
+	ocamlbuild -no-links -libs $(LIBS) -I debug_lib -use-ocamlfind pa_debug.cmo
 	cp _build/pa_debug.cmo .
 
 clean:
