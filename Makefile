@@ -9,7 +9,6 @@ FLAGS = $(INCLUDES),-dtypes
 
 pa_debug_cmo: debug
 	ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_debug.ml
-	cp _build/pa_debug.cmo .
 
 debug:
 	ocamlc -c globals.cmo
@@ -19,6 +18,7 @@ debug:
 
 pa_debug_ob:
 	ocamlbuild -no-links -libs $(LIBS) -use-ocamlfind pa_debug.cmo
+	cp _build/pa_debug.cmo .
 
 clean:
 	rm -f *.cm[aoi]
