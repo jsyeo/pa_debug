@@ -8,3 +8,6 @@ _build
 # vim files
 *~
 *.swp
+
+# mac files
+.DS_Store
