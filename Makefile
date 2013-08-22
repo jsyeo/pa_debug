@@ -22,6 +22,4 @@ pa_debug_ob:
 
 clean:
 	rm -f *.cm[aoi]
-	rm -f vec_deriving
-	rm -f variant
-	rm -f *.out
+	rm -rf _build
