@@ -18,11 +18,6 @@ debug:
 
 pa_debug_ob:
 	ocamlbuild -no-links -libs $(LIBS) -I debug_lib -use-ocamlfind pa_debug.cmo
-	cp _build/pa_debug.cmo .
-	cp _build/gen.cmo .
-	cp _build/error.cmo .
-	cp _build/globals.cmo .
-	cp _build/debug.cmo .
 
 clean:
 	rm -f *.cm[aoi]
