@@ -1,0 +1,4 @@
+<base.*>: syntax(camlp4o), package(camlp4.quotations.o, optcomp)
+<type.*>: syntax(camlp4o), package(camlp4.quotations.r, optcomp)
+<utils.*>: syntax(camlp4o), package(optcomp)
+<defs.*>: package(camlp4)
