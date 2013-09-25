@@ -1,4 +1,5 @@
 <pa_debug.*>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
+<pp.*>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
 <out.*>: package(deriving-ocsigen.syntax), syntax(camlp4o)
 <test_ast.*>: package(deriving-ocsigen.syntax), syntax(camlp4of)
 <test_pa_debug.*>: package(deriving-ocsigen.syntax), pp(camlp4of), use_camlp4, use_str, use_unix
