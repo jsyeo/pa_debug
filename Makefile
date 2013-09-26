@@ -1,7 +1,7 @@
 pa_debug:
 	ocamlc -I +camlp4 camlp4lib.cma debug.cmo -pp camlp4orf -c pa_debug.ml
 
-LIBS = dynlink,camlp4lib,deriving
+LIBS = dynlink,camlp4lib,deriving,pa_deriving
 
 INCLUDES = -I,+camlp4
 

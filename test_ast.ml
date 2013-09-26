@@ -1,5 +1,6 @@
 (*
 play with ocaml and see their ast here!
+
 Dump the ast with camlp4orf test_ast.ml -printer o
 
 If you are playing with another syntax extension, pass it to camlp4orf like this:
@@ -7,9 +8,10 @@ If you are playing with another syntax extension, pass it to camlp4orf like this
 camlp4orf -I ~/.opam/system/lib/deriving-ocsigen pa_deriving.cma test_ast.ml
 
 *)
-let bi = <:expr< let int a = 1 in a>>
 
-<:ctyp< type a = int list >>
+let bi = <:expr< let int a = 1 in a>>;;
+
+<:str_item< type a = int list >>
 
 let m = <:expr< x + b >> in
 <:str_item<
