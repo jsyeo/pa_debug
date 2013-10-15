@@ -1,5 +1,27 @@
-<pa_debug.*>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
+# OASIS_START
+# DO NOT EDIT (digest: d7249154b68ee8eab114df0bf7ffdbc1)
+# Ignore VCS directories, you can use the same kind of rule outside 
+# OASIS_START/STOP if you want to exclude directories that contains 
+# useless stuff for the build process
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library pa_debug_lib
+"pa_debug_lib.cmxs": use_pa_debug_lib
+# Library pa_debug_syntax
+"syntax/pa_debug_syntax.cmxs": use_pa_debug_syntax
+<syntax/*.ml{,i}>: pkg_deriving-ocsigen.base
+<syntax/*.ml{,i}>: pkg_camlp4.lib
+# OASIS_STOP
+<syntax/*.ml>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
 <pp.*>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
 <out.*>: package(deriving-ocsigen.syntax), syntax(camlp4o)
 <test_ast.*>: package(deriving-ocsigen.syntax), syntax(camlp4of)
-<test_pa_debug.*>: package(deriving-ocsigen.syntax), pp(camlp4of), use_camlp4, use_str, use_unix
+<test_pa_debug.*>: syntax(camlp4of), package(pa_debug_lib, pa_debug_lib.syntax), use_str

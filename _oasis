@@ -1,0 +1,23 @@
+OASISFormat: 0.3
+Name:        pa_debug
+Version:     0.0.1
+Synopsis:    test
+Authors:     Jason
+License:     Apache
+Plugins:     DevFiles (0.3), META (0.3)
+
+Library pa_debug_lib
+  Path: .
+  BuildTools: ocamlbuild
+  Modules: Pp
+
+Library pa_debug_syntax
+  Path: syntax
+  BuildTools: ocamlbuild, camlp4of
+  Modules: Pa_debug
+  FindLibParent: pa_debug_lib
+  FindlibName: syntax
+  BuildDepends: deriving-ocsigen.base, camlp4.lib
+  XMETAType: syntax
+  XMETARequires: camlp4
+  XMETADescription: Syntax extension for debug
