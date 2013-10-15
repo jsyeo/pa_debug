@@ -220,7 +220,7 @@ let generate_debug_function ~r ~bi ~ty _loc =
         let debug_fun = mk_fun _loc (List.tl patts) debug_fun_body in
         let res = <:str_item<
           $list:List.map snd printers_assoc$;;
-          let $rec:r$ $renamed_fun$ and $lid:fun_id$ = $debug_fun$>> in
+          let rec $renamed_fun$ and $lid:fun_id$ = $debug_fun$>> in
         let _ = print_string ("====PRINTING GENERATED AST for " ^ fun_id ^ "===\n") in
         let _ = Pp.print_str_item res in
         let _ = print_string "====FINISH===\n" in
