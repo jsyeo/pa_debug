@@ -1,0 +1,21 @@
+# OASIS_START
+# DO NOT EDIT (digest: 0f9171aaf19b7e983476b7193c4d486e)
+version = "0.0.1"
+description = "test"
+requires =
+"deriving-ocsigen.syntax deriving-ocsigen.base camlp4.lib debuglib"
+archive(byte) = "pa_debug_lib.cma"
+archive(byte, plugin) = "pa_debug_lib.cma"
+archive(native) = "pa_debug_lib.cmxa"
+archive(native, plugin) = "pa_debug_lib.cmxs"
+exists_if = "pa_debug_lib.cma"
+package "syntax" (
+ version = "0.0.1"
+ description = "Syntax extension for debug"
+ requires = "deriving-ocsigen.base camlp4"
+ archive(syntax, preprocessor) = "pa_debug_syntax.cma"
+ archive(syntax, toploop) = "pa_debug_syntax.cma"
+ exists_if = "pa_debug_syntax.cma"
+)
+# OASIS_STOP
+
