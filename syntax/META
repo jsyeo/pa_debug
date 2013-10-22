@@ -1,0 +1,10 @@
+# OASIS_START
+# DO NOT EDIT (digest: b6d20f1e88e9bf46ec53a8e5db2ef525)
+version = "0.0.1"
+description = "Syntax extension for debug"
+requires = "camlp4"
+archive(syntax, preprocessor) = "pa_debug_syntax.cma"
+archive(syntax, toploop) = "pa_debug_syntax.cma"
+exists_if = "pa_debug_syntax.cma"
+# OASIS_STOP
+

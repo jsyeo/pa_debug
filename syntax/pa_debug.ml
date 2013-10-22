@@ -3,6 +3,36 @@ open Syntax
 
 let _loc = Loc.ghost
 
+let debug = true
+
+let debugpr =
+  if debug then
+    print_endline
+  else
+    (fun s -> ())
+
+let syntax_printer =
+  let module PP = Camlp4.Printers.OCaml.Make (Syntax) in
+  new PP.printer ~comments:false ()
+
+let string_of_expr expr =
+  let buffer = Buffer.create 16 in
+  Format.bprintf buffer "%a%!" syntax_printer#expr expr;
+  Buffer.contents buffer
+
+let string_of_str_item str =
+  let buffer = Buffer.create 16 in
+  Format.bprintf buffer "%a%!" syntax_printer#str_item str;
+  Buffer.contents buffer
+
+let string_of_ctyp ctyp =
+  let buffer = Buffer.create 16 in
+  Format.bprintf buffer "%a%!" syntax_printer#simple_ctyp ctyp;
+  Buffer.contents buffer
+
+let string_of_list pr = |> List.map pr |> String.concat
+
+
 (*
   turns a list of patterns into variables bounded to functions
   [a;b;c] ==> (\a -> \b -> \c -> expression)
@@ -152,7 +182,7 @@ let type_to_fun_name ty =
 Taken from ocsigen/deriving/syntax/extend.ml
 *)
 let instantiate_show_printer _loc t =
-  let open Pa_deriving_common in
+  let open Pa_deriving in
   try
     let classname = "Show" in
     let class_ = Base.find classname in
@@ -177,7 +207,7 @@ let instantiate_show_printer _loc t =
   This includes the Debug function call and the printers.
 *)
 let mk_head _loc fun_name num_args printers_assoc =
-  let debug_funs = [| <:expr< Debug.ho_1 >>;<:expr< Debug.no_2 >>; <:expr< Debug.ho_3 >> |] in
+  let debug_funs = [| <:expr< Debug.ho_1 >>;<:expr< Debug.go_2 false false >>; <:expr< Debug.no_3 >> |] in
   let debug_fun = debug_funs.(num_args - 1) in
   List.fold_left (fun accum (pr_name, _) -> <:expr< $accum$ $lid:pr_name$ >>) <:expr< $debug_fun$ $str:fun_name$ >> printers_assoc
 
@@ -221,12 +251,15 @@ let generate_debug_function ~r ~bi ~ty _loc =
         let res = <:str_item<
           $list:List.map snd printers_assoc$;;
           let rec $renamed_fun$ and $lid:fun_id$ = $debug_fun$>> in
-        let _ = print_string ("====PRINTING GENERATED AST for " ^ fun_id ^ "===\n") in
-        let _ = Pp.print_str_item res in
-        let _ = print_string "====FINISH===\n" in
+        let _ = debugpr ("====PRINTING GENERATED AST for " ^ fun_id ^ "===\n") in
+        let _ = debugpr @@ string_of_str_item res in
+        let _ = debugpr "====FINISH===\n" in
         res
     end
-  | None -> failwith "OOPS. TODO: No type. Please handle it"
+  | None ->
+     (* No types supplied, figure out types from bin_annot. *)
+     
+     failwith "OOPS. TODO: No type. Please handle it"
 ;;
 
 (* The Grammar to add the debug annotation *)
@@ -234,12 +267,13 @@ EXTEND Gram
 str_item:
       [ "top"
           [ "let"; "debug" ; r = opt_rec; bi = binding ->
-          let _ = Printers.OCaml.print_implem <:str_item< let $bi$ in 2 >> in
           generate_debug_function ~r:r ~bi:bi ~ty:None _loc
           | "let"; "debug"; "<"; types = LIST1 ctyp SEP "," ; ">"; r = opt_rec; bi = binding ->
-          let _ = Pp.print_ctyp_list types in
+          let _ = debugpr @@ string_of_list string_of_ctyp types in
           generate_debug_function ~r:r ~bi:bi ~ty:(Some types) _loc
           ]
       ]
 ;
 END
+
+module M = Camlp4.Register.OCamlPrinter(Id)(Make)
