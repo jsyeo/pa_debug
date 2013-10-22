@@ -4,6 +4,8 @@ _build
 *.cmi
 *.cma
 *.cmax
+setup.log
+setup.data
 
 # vim files
 *~
