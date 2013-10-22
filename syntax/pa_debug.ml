@@ -3,7 +3,7 @@ open Syntax
 
 let _loc = Loc.ghost
 
-let debug = true
+let debug = false
 
 let debugpr =
   if debug then
@@ -30,8 +30,8 @@ let string_of_ctyp ctyp =
   Format.bprintf buffer "%a%!" syntax_printer#simple_ctyp ctyp;
   Buffer.contents buffer
 
-let string_of_list pr = |> List.map pr |> String.concat
-
+let string_of_list printer lst =
+  String.concat ";" @@ List.map printer lst
 
 (*
   turns a list of patterns into variables bounded to functions
@@ -182,7 +182,7 @@ let type_to_fun_name ty =
 Taken from ocsigen/deriving/syntax/extend.ml
 *)
 let instantiate_show_printer _loc t =
-  let open Pa_deriving in
+  let open Pa_deriving_common in
   try
     let classname = "Show" in
     let class_ = Base.find classname in
@@ -276,4 +276,4 @@ str_item:
 ;
 END
 
-module M = Camlp4.Register.OCamlPrinter(Id)(Make)
+module M = Camlp4.Register.OCamlPrinter(Camlp4.Printers.OCaml.Id)(Camlp4.Printers.OCaml.Make)
