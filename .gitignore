@@ -4,6 +4,7 @@ _build
 *.cmi
 *.cma
 *.cmax
+*.mllib
 
 # vim files
 *~
