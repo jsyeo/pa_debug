@@ -4,7 +4,8 @@ Version:     0.0.1
 Synopsis:    test
 Authors:     Jason
 License:     Apache
-Plugins:     DevFiles (0.3), META (0.3)
+Plugins:     META (0.3)
+BuildDepends: deriving-ocsigen.syntax, deriving-ocsigen.base, camlp4.lib, debuglib
 
 Library pa_debug_lib
   Path: .
@@ -17,7 +18,7 @@ Library pa_debug_syntax
   Modules: Pa_debug
   FindLibParent: pa_debug_lib
   FindlibName: syntax
-  BuildDepends: deriving-ocsigen.base, camlp4.lib
+  BuildDepends: deriving-ocsigen.syntax, deriving-ocsigen.base, camlp4.lib, debuglib
   XMETAType: syntax
-  XMETARequires: camlp4
+  XMETARequires: deriving-ocsigen.base, camlp4
   XMETADescription: Syntax extension for debug
