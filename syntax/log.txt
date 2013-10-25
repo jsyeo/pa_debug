@@ -1,0 +1,102 @@
+int;int;int
+====PRINTING GENERATED AST for add===
+
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;; let rec pa_debug0 x y = x + y
+and add x y =
+  Debug.go_2 false false "add" pr_int pr_int pr_int pa_debug0 x y;;
+====FINISH===
+
+int;int;int
+====PRINTING GENERATED AST for add===
+
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_int x =
+  (let module Show =
+     struct
+       type inline = int;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_int;;
+       include Show_inline;;
+     end
+    in Show.show) x;; let rec pa_debug1 x y = x + y
+and add x y =
+  Debug.go_2 false false "add" pr_int pr_int pr_int pa_debug1 x y;;
+====FINISH===
+
+float;float;float
+====PRINTING GENERATED AST for addf===
+
+let pr_float x =
+  (let module Show =
+     struct
+       type inline = float;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_float;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_float x =
+  (let module Show =
+     struct
+       type inline = float;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_float;;
+       include Show_inline;;
+     end
+    in Show.show) x;;
+let pr_float x =
+  (let module Show =
+     struct
+       type inline = float;;
+       module Show_inline : Deriving_Show.Show with type a = inline =
+         Deriving_Show.Show_float;;
+       include Show_inline;;
+     end
+    in Show.show) x;; let rec pa_debug2 x y = x +. y
+and addf x y =
+  Debug.go_2 false false "addf" pr_float pr_float pr_float pa_debug2 x y;;
+====FINISH===
+

@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: be7aeb9bd2c1a3e52336597fabbfd97b)
+# DO NOT EDIT (digest: 21f344d1e4b333b526ade7211575f9c0)
 # Ignore VCS directories, you can use the same kind of rule outside 
 # OASIS_START/STOP if you want to exclude directories that contains 
 # useless stuff for the build process
@@ -25,6 +25,7 @@
 <syntax/*.ml{,i}>: pkg_deriving-ocsigen.base
 <syntax/*.ml{,i}>: pkg_camlp4.lib
 <syntax/*.ml{,i}>: pkg_debuglib
+<syntax/*.ml{,i}>: pkg_compiler-libs.common
 # OASIS_STOP
 <syntax/*.ml>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4
 <pp.*>: pp(camlp4of), package(deriving-ocsigen.syntax), use_camlp4

@@ -2,7 +2,7 @@
 
 (* #load_rec "pa_deriving.cma";; *)
 (* #load "deriving.cma";; *)
-(* #load "pp.cmo";; *)
+(* #require "compiler-libs.common";; *)
 (* #load_rec "pa_debug.cmo";; *)
 
 (* #load "str.cma";; *)
@@ -10,6 +10,7 @@
 
 (* debugging simple functions *)
 let debug<int, int> add1 x = x + 1;;
+
 
 add1 5;;
 

@@ -1,1 +1,2 @@
 <test_pa_debug.*>: syntax(camlp4o), package(deriving-ocsigen.syntax), package(pa_debug_lib.syntax), package(debuglib)
+<no_types.*>: syntax(camlp4o), package(deriving-ocsigen.syntax), package(pa_debug_lib.syntax), package(debuglib)

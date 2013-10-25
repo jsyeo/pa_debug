@@ -18,7 +18,7 @@ Library pa_debug_syntax
   Modules: Pa_debug
   FindLibParent: pa_debug_lib
   FindlibName: syntax
-  BuildDepends: deriving-ocsigen.syntax, deriving-ocsigen.base, camlp4.lib, debuglib
+  BuildDepends: deriving-ocsigen.syntax, deriving-ocsigen.base, camlp4.lib, debuglib, compiler-libs.common
   XMETAType: syntax
-  XMETARequires: deriving-ocsigen.base, camlp4
+  XMETARequires: deriving-ocsigen.base, compiler-libs.common, camlp4
   XMETADescription: Syntax extension for debug
