@@ -6,6 +6,12 @@ _build
 *.cmax
 setup.log
 setup.data
+*.native
+*.byte
+*.out
+
+#pa_debug files
+log.txt
 
 # vim files
 *~
