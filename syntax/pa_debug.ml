@@ -243,24 +243,6 @@ let ml_to_cmt filename =
   let len = String.length filename in
   String.sub filename 0 (len - 3) ^ ".cmt"
 
-let read_types_at_loc loc =
-  (* No types supplied, figure out types from bin_annot. *)
-  let filename = Loc.file_name loc in
-  let _ = debuglog @@ filename in
-  let cmtfilename = ml_to_cmt filename in
-  let cmtfilename = "whee.cmt" in
-  let _ = debuglog @@ Loc.to_string loc in
-  let start, stop = Loc.start_pos loc, Loc.stop_pos loc in
-  let exprloc =
-    {Location.loc_start = start;
-     Location.loc_end = stop;
-     Location.loc_ghost = false} in
-  let _ = debuglog @@ Retype.print_ty_from_cmt exprloc cmtfilename in
-  let ty = Retype.types_from_cmt exprloc cmtfilename in
-  let typnames = Retype.types_from_arrow ty in
-  let ctyps = List.map (fun name -> <:ctyp< $lid:name$ >>) typnames in
-  ctyps
-
 let infer_types str_item_string =
   let open Typedtree in
   let open Types in
