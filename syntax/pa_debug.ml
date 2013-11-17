@@ -286,16 +286,46 @@ let generate_debug_function ~r ~bi ~ty _loc =
       else
         let printers_assoc = mk_printers _loc ty in
         let patts = get_patts bi in
-        let new_fun_name = gen_fresh_name () in
-        let renamed_fun = rename_fun bi new_fun_name in
-        let new_patts = get_patts renamed_fun in
+        let new_patts = get_patts bi in
         let fun_id = get_fun_id bi in     (* Original function's name *)
         let types = mk_head _loc fun_id num_args printers_assoc in
         let debug_fun_body = mk_appln _loc types new_patts in
         let debug_fun = mk_fun _loc (List.tl patts) debug_fun_body in
         let res = <:str_item<
           $list:List.map snd printers_assoc$;;
-          let rec $renamed_fun$ and $lid:fun_id$ = $debug_fun$>> in
+          let $rec:r$ $binding:bi$
+          let $lid:fun_id$ = $debug_fun$>> in
+        let _ = debuglog ("====PRINTING GENERATED AST for " ^ fun_id ^ "===\n") in
+        let _ = debuglog @@ string_of_str_item res in
+        let _ = debuglog "====FINISH===\n" in
+        res
+    end
+  | None ->
+     (* No types supplied, figure out types from bin_annot. *)
+     failwith "OOPS. TODO: No type. Please handle it"
+;;
+
+let generate_debug_rec_function ~r ~bi ~ty _loc =
+  match ty with
+  | Some ty ->
+    begin
+      let num_args = count_args bi in
+      let num_types = List.length ty in
+      if num_args + 1 <> num_types then
+        failwith "Pa_debug: Number of types not equal number of args"
+      else
+        let printers_assoc = mk_printers _loc ty in
+        let patts = get_patts bi in
+        let new_fun_name = gen_fresh_name () in
+        let renamed_bi = rename_fun bi new_fun_name in
+        let new_patts = get_patts renamed_bi in
+        let fun_id = get_fun_id bi in     (* Original function's name *)
+        let types = mk_head _loc fun_id num_args printers_assoc in
+        let debug_fun_body = mk_appln _loc types new_patts in
+        let debug_fun = mk_fun _loc (List.tl patts) debug_fun_body in
+        let res = <:str_item<
+          $list:List.map snd printers_assoc$;;
+          let rec $renamed_bi$ and $lid:fun_id$ = $debug_fun$>> in
         let _ = debuglog ("====PRINTING GENERATED AST for " ^ fun_id ^ "===\n") in
         let _ = debuglog @@ string_of_str_item res in
         let _ = debuglog "====FINISH===\n" in
@@ -317,6 +347,13 @@ str_item:
           generate_debug_function ~r:r ~bi:bi ~ty:(Some types) _loc
           | "let"; "debug"; "<"; types = LIST1 ctyp SEP "," ; ">"; r = opt_rec; bi = binding ->
           generate_debug_function ~r:r ~bi:bi ~ty:(Some types) _loc
+          | "let"; "debugrec"; r = opt_rec; bi = binding ->
+          let s = <:str_item< let $rec:r$ $binding:bi$ >> in
+          let str_string = string_of_str_item s in
+          let types = infer_types str_string in
+          generate_debug_rec_function ~r:r ~bi:bi ~ty:(Some types) _loc
+          | "let"; "debugrec"; "<"; types = LIST1 ctyp SEP "," ; ">"; r = opt_rec; bi = binding ->
+          generate_debug_rec_function ~r:r ~bi:bi ~ty:(Some types) _loc
           ]
       ]
 ;
